@@ -41,6 +41,6 @@ class Configuration:
         Enables runtime attribute discovery and IDE autocompletion.
         """
         # Combine standard attributes with config keys
-        standard_attrs = super().__dir__()
+        standard_attrs = list(super().__dir__())
         config_attrs = list(self.configs.keys())
         return sorted(set(standard_attrs + config_attrs))
