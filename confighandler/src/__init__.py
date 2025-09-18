@@ -14,3 +14,6 @@ def parse_date(date_str: str) -> datetime:
         except ValueError:
             continue
     raise ValueError(f"Date format not recognized for date: {date_str}")
+
+
+EXPECTED_COLUMNS = {'id', 'name', 'description', 'type_id', 'value', 'debugmode'}

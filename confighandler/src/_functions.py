@@ -231,7 +231,7 @@ def get_parameter(row: DictRow) -> Parameter:
         row_model = Row.model_validate(dict(row))
         return Parameter(name=row_model.name, value=row_model.value)
     except Exception as e:
-        raise ValueError(f"An error: {e} occured while retrieving row") from e
+        raise e
 
 
 def get_config(

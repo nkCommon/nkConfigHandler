@@ -1,7 +1,8 @@
 """ Pydantic models used in the module """
 
-from pydantic import BaseModel, ConfigDict, computed_field
+from pydantic import BaseModel, ConfigDict, computed_field, field_validator
 from ._constants import TYPE_DEFINITIONS, TYPE_MAPPERS
+from . import EXPECTED_COLUMNS
 
 
 class Row(BaseModel):
@@ -15,6 +16,14 @@ class Row(BaseModel):
     )
 
     row:dict
+
+    @field_validator("row")
+    @classmethod
+    def all_columns_present(cls, v:dict):
+        """Valuates if all columns are present in the row"""
+        diff = EXPECTED_COLUMNS - set(v.keys())
+        assert len(diff) == 0, f'Column {diff}'
+        return v
 
     @computed_field
     @property

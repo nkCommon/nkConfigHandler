@@ -1,5 +1,7 @@
 from unittest import TestCase
+from pydantic import ValidationError
 from confighandler.src.configuration import Configuration
+from confighandler.src._functions import get_parameter, load_config
 
 class TestConfiguration(TestCase):
     def setUp(self) -> None:
@@ -9,6 +11,14 @@ class TestConfiguration(TestCase):
         self.invalid_debug = "False"
         self.valid_debug = False
         self.config: Configuration
+        self.invalid_type = {
+            'id':'temp',
+            'name':'name1',
+            'description':'desc1',
+            'type_id': '2',
+            'value':"1",
+            'debugmode': True
+        }
 
     def test_valid_app(self):
         """
@@ -21,3 +31,9 @@ class TestConfiguration(TestCase):
         )
         self.assertIsInstance(self.config.configs, dict)
         self.assertIsInstance(self.config.edoc_pwd, str)
+
+    def test_invalid_value(self):
+        with self.assertRaises(ValueError):
+            config = load_config("/Users/madsd/Desktop/git/_dev/database.ini")
+            get_parameter(self.invalid_type)
+
