@@ -253,7 +253,7 @@ def get_config(
         constants = {}
         config = load_config(filename=ini_file)
         connection = connect(config)
-        if connection:
+        with connection:
             # print(f'connection established')
             #   Select the values from the database
             where_conditions = {"id": appname, "debugmode": debugging}
