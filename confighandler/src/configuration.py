@@ -14,6 +14,8 @@ class Configuration:
         named_attributes: bool = False,
         ini_file: str = "database.ini",
     ):
+        self.appname = appname
+        self.debugging = debugging
         self.named_attributes = named_attributes
         self.initialized = True
         self.ini_file = ini_file
@@ -44,3 +46,6 @@ class Configuration:
         standard_attrs = list(super().__dir__())
         config_attrs = list(self.configs.keys())
         return sorted(set(standard_attrs + config_attrs))
+
+    def __repr__(self) -> str:
+        return f"Configuration(appname={self.appname},debugging={self.debugging},named_attributes={self.named_attributes},ini_file = {self.ini_file})"
