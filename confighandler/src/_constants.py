@@ -13,6 +13,7 @@ TYPE_MAPPERS: dict[int, Callable[[str], Any]] = {
     6: lambda x: [int(val) for val in x.split(",")],  # Integer list
     7: lambda x: [locale.atof(val) for val in x.split(",")],  # Float list
     8: parse_date,  # Date
+    9: lambda x: dict(item.split(":") for item in x.split(",")),  # Dictionary
 }
 
 
@@ -26,4 +27,5 @@ TYPE_DEFINITIONS: dict[int, type] = {
     6: list[int],  # Integer list
     7: list[float],  # Float list
     8: datetime,  # Date
+    9: dict,  # Dictionary
 }
