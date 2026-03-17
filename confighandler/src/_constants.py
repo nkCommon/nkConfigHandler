@@ -27,5 +27,5 @@ TYPE_DEFINITIONS: dict[int, type] = {
     6: list[int],  # Integer list
     7: list[float],  # Float list
     8: datetime,  # Date
-    9: dict,  # Dictionary
+    9: dict[int, str],  # Dictionary
 }
